@@ -6,7 +6,7 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ master citest ]
   pull_request:
     branches: [ master ]
 
@@ -29,6 +29,9 @@ jobs:
     #generate an ssh key pair for being able to clone bee-dmr
     - name: Generate SSH key pair
       run: ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa
+    
+    - name: Setup Debug Session
+      uses: csexton/debugger-action@master
 
     # Runs a single command using the runners shell
     - name: Run tests in bootstrap image

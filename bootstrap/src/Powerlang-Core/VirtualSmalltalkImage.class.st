@@ -42,12 +42,20 @@ VirtualSmalltalkImage class >> new [
 
 { #category : #accessing }
 VirtualSmalltalkImage class >> newKernelSpec [
-	| current repo spec |
-	current := 'specs/current' asFileReference contents trim.
+	| root current repo spec |
+
+	((Smalltalk respondsTo: #isSmalltalkX) and: [ Smalltalk isSmalltalkX ]) ifTrue: [ 
+		root := (Smalltalk getPackageDirectoryForPackage: self package) / '..' / '..'.
+	] ifFalse: [ 
+		root := '.' asFileReference.
+	].
+
+	current := (root / 'specs' / 'current') contents asString trim.
 	repo := TonelRepository new
-		directory: ('specs/' , current) asFileReference.
+		directory: (root / 'specs' / current).
 	spec := repo asRingEnvironmentWith: #(Kernel).
 	^ spec clean
+
 ]
 
 { #category : #initialization }

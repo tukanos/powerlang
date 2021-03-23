@@ -30,7 +30,7 @@ Pharo (that is, @janvrany) and to allow experimentation with [libgdbs][4]
 
 1.  Clone Powerlang:
 
-        hg clone https://github.com/powerlang/powerlang.git
+        git clone https://github.com/powerlang/powerlang.git
 
 2.  In Smalltalk/X workspace, execute:
 
